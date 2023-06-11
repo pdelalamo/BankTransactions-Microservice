@@ -8,8 +8,8 @@ import com.example.demo.exceptions.AccountNotFoundException;
 @RestControllerAdvice
 public class AccountNotFoundAdvice {
 
-  @ExceptionHandler(AccountNotFoundException.class)
-  public String accountNotFoundHandler(AccountNotFoundException ex) {
-    return ex.getMessage();
-  }
+	@ExceptionHandler(AccountNotFoundException.class)
+	public String accountNotFoundHandler(AccountNotFoundException ex) {
+		return ex.getMessage();
+	}
 }

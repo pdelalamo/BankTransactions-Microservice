@@ -29,9 +29,9 @@ public class TransactionController {
 			return ResponseEntity.badRequest().body("Transaction could not be created");
 
 	}
-	
-    @PostMapping("/status")
-    public TransactionStatusResponse getTransactionStatus(@RequestBody TransactionStatusRequest request) {
-    	return transactionService.getTransactionStatus(request);
-    }
+
+	@PostMapping("/status")
+	public TransactionStatusResponse getTransactionStatus(@RequestBody TransactionStatusRequest request) {
+		return transactionService.getTransactionStatus(request);
+	}
 }

@@ -6,6 +6,6 @@ import com.example.demo.models.TransactionStatusResponse;
 
 public interface TransactionService {
 	boolean createTransaction(TransactionPayload transactionPayload);
-	
+
 	TransactionStatusResponse getTransactionStatus(TransactionStatusRequest transactionStatusRequest);
 }

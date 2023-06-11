@@ -28,12 +28,15 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Autowired
 	AccountRepository accountRepository;
-	
+
 	@Autowired
 	Utils utils;
 
-	/**saves a transaction in the DB and updates the associated account
- 	*@transactionPayload - the request**/
+	/**
+	 * saves a transaction in the DB and updates the associated account
+	 * 
+	 * @transactionPayload - the request
+	 **/
 	public boolean createTransaction(TransactionPayload transactionPayload) {
 		Optional<Account> account = searchAccount(transactionPayload);
 		saveTransaction(transactionPayload);
@@ -41,8 +44,11 @@ public class TransactionServiceImpl implements TransactionService {
 		return true;
 	}
 
-	/**finds an account in the DB
- 	*@transactionPayload - the request**/
+	/**
+	 * finds an account in the DB
+	 * 
+	 * @transactionPayload - the request
+	 **/
 	@Transactional
 	public Optional<Account> searchAccount(TransactionPayload transactionPayload) {
 		// First we search the account by the IBAN
@@ -52,17 +58,20 @@ public class TransactionServiceImpl implements TransactionService {
 		return account;
 	}
 
-	/**saves a transaction in the DB
- 	*@transactionPayload - the request**/	
+	/**
+	 * saves a transaction in the DB
+	 * 
+	 * @transactionPayload - the request
+	 **/
 	@Transactional
 	public void saveTransaction(TransactionPayload transactionPayload) {
 
 		// Create an instance of 'Transaction' entity
 		Transaction transaction = new Transaction();
-		if(transactionPayload.getReference() == null)
+		if (transactionPayload.getReference() == null)
 			transaction.setReference(utils.generateRandomString());
-		else			
-		transaction.setReference(transactionPayload.getReference());
+		else
+			transaction.setReference(transactionPayload.getReference());
 		transaction.setAccount_iban(transactionPayload.getAccount_iban());
 		transaction.setDate(transactionPayload.getDate());
 		transaction.setAmount(transactionPayload.getAmount());
@@ -73,11 +82,13 @@ public class TransactionServiceImpl implements TransactionService {
 		// 'TransactionRepository'
 		transaction = transactionRepository.save(transaction);
 	}
-	
-	
-	/**updates an account balance in DB
- 	*@transactionPayload - the request
- 	*@account - the account to update**/
+
+	/**
+	 * updates an account balance in DB
+	 * 
+	 * @transactionPayload - the request
+	 * @account - the account to update
+	 **/
 	@Transactional
 	public void updateBalance(TransactionPayload transactionPayload, Optional<Account> account) {
 
@@ -90,19 +101,24 @@ public class TransactionServiceImpl implements TransactionService {
 		account.get().setBalance(newBalance);
 		accountRepository.save(account.get());
 	}
-	
-	/**Returns the transaction with its status
- 	*@transactionStatusRequest - the request that contains reference and date**/
+
+	/**
+	 * Returns the transaction with its status
+	 * 
+	 * @transactionStatusRequest - the request that contains reference and date
+	 **/
 	@Override
 	public TransactionStatusResponse getTransactionStatus(TransactionStatusRequest transactionStatusRequest) {
 		Optional<Transaction> transaction = findByReference(transactionStatusRequest.getReference());
 		return manageTransactionResponse(transaction, transactionStatusRequest);
 	}
-	
-	
-	/**Manages the status of the transaction based on the status and the date
-	 	*@transaction - The transaction stored in the DB 
-	 	*@transactionStatusRequest - the request that contains reference and date**/
+
+	/**
+	 * Manages the status of the transaction based on the status and the date
+	 * 
+	 * @transaction - The transaction stored in the DB
+	 * @transactionStatusRequest - the request that contains reference and date
+	 **/
 	public TransactionStatusResponse manageTransactionResponse(Optional<Transaction> transaction,
 			TransactionStatusRequest transactionStatusRequest) {
 		TransactionStatusResponse response = new TransactionStatusResponse();
@@ -167,9 +183,12 @@ public class TransactionServiceImpl implements TransactionService {
 
 		return response;
 	}
-	
-	/**Finds a transaction by its reference
-	 *@reference - the reference (id) of the transaction **/
+
+	/**
+	 * Finds a transaction by its reference
+	 * 
+	 * @reference - the reference (id) of the transaction
+	 **/
 	@Transactional
 	public Optional<Transaction> findByReference(String reference) {
 		return transactionRepository.findById(reference);
