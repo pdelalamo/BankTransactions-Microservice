@@ -130,10 +130,10 @@ public class TransactionServiceTest {
 
 			Optional<Transaction> transaction = Optional.of(new Transaction());
 			transaction.ifPresent(t -> {
-			    t.setReference(reference);
-			    t.setAmount(amount);
-			    t.setFee(fee);
-			    t.setDate(LocalDateTime.now().minusDays(1));
+				t.setReference(reference);
+				t.setAmount(amount);
+				t.setFee(fee);
+				t.setDate(LocalDateTime.now().minusDays(1));
 			});
 
 			when(transactionService.findByReference(reference)).thenReturn(transaction);
@@ -150,40 +150,39 @@ public class TransactionServiceTest {
 			assertEquals(amount.subtract(fee), response.getAmount());
 		}
 	}
-	
+
 	@Test
 	public void testTransactionStatusTwo() {
 
 		// Given
-			String reference = "12345A";
-			String channel = "INTERNAL";
-			BigDecimal amount = BigDecimal.valueOf(1000.0);
-			BigDecimal fee = BigDecimal.valueOf(10.0);
-			
-			Optional<Transaction> transaction = Optional.of(new Transaction());
-			transaction.ifPresent(t -> {
-			    t.setReference(reference);
-			    t.setAmount(amount);
-			    t.setFee(fee);
-			    t.setDate(LocalDateTime.now().minusDays(1)); // Set date to yesterday
-			});
+		String reference = "12345A";
+		String channel = "INTERNAL";
+		BigDecimal amount = BigDecimal.valueOf(1000.0);
+		BigDecimal fee = BigDecimal.valueOf(10.0);
 
+		Optional<Transaction> transaction = Optional.of(new Transaction());
+		transaction.ifPresent(t -> {
+			t.setReference(reference);
+			t.setAmount(amount);
+			t.setFee(fee);
+			t.setDate(LocalDateTime.now().minusDays(1)); // Set date to yesterday
+		});
 
-			when(transactionService.findByReference(reference)).thenReturn(transaction);
+		when(transactionService.findByReference(reference)).thenReturn(transaction);
 
-			TransactionStatusRequest request = new TransactionStatusRequest();
-			request.setReference(reference);
-			request.setChannel(channel);
+		TransactionStatusRequest request = new TransactionStatusRequest();
+		request.setReference(reference);
+		request.setChannel(channel);
 
-			// When
-			TransactionStatusResponse response = transactionService.getTransactionStatus(request);
+		// When
+		TransactionStatusResponse response = transactionService.getTransactionStatus(request);
 
-			// Then
-			assertEquals("SETTLED", response.getStatus());
-			assertEquals(amount, response.getAmount());
-			assertEquals(fee, response.getFee());		
+		// Then
+		assertEquals("SETTLED", response.getStatus());
+		assertEquals(amount, response.getAmount());
+		assertEquals(fee, response.getFee());
 	}
-	
+
 	@Test
 	public void testTransactionStatusThree() {
 
@@ -194,15 +193,14 @@ public class TransactionServiceTest {
 			String channel = testCase[0];
 			BigDecimal amount = BigDecimal.valueOf(1000.0);
 			BigDecimal fee = BigDecimal.valueOf(10.0);
-			
+
 			Optional<Transaction> transaction = Optional.of(new Transaction());
 			transaction.ifPresent(t -> {
-			    t.setReference(reference);
-			    t.setAmount(amount);
-			    t.setFee(fee);
-			    t.setDate(LocalDateTime.now()); 
+				t.setReference(reference);
+				t.setAmount(amount);
+				t.setFee(fee);
+				t.setDate(LocalDateTime.now());
 			});
-
 
 			when(transactionService.findByReference(reference)).thenReturn(transaction);
 
@@ -218,134 +216,133 @@ public class TransactionServiceTest {
 			assertEquals(amount.subtract(fee), response.getAmount());
 		}
 	}
-	
+
 	@Test
 	public void testTransactionStatusFour() {
 
 		// Given
-			String reference = "12345A";
-			String channel = "INTERNAL";
-			BigDecimal amount = BigDecimal.valueOf(1000.0);
-			BigDecimal fee = BigDecimal.valueOf(10.0);
-			
-			Optional<Transaction> transaction = Optional.of(new Transaction());
-			transaction.ifPresent(t -> {
-			    t.setReference(reference);
-			    t.setAmount(amount);
-			    t.setFee(fee);
-			    t.setDate(LocalDateTime.now()); 
-			});
+		String reference = "12345A";
+		String channel = "INTERNAL";
+		BigDecimal amount = BigDecimal.valueOf(1000.0);
+		BigDecimal fee = BigDecimal.valueOf(10.0);
 
+		Optional<Transaction> transaction = Optional.of(new Transaction());
+		transaction.ifPresent(t -> {
+			t.setReference(reference);
+			t.setAmount(amount);
+			t.setFee(fee);
+			t.setDate(LocalDateTime.now());
+		});
 
-			when(transactionService.findByReference(reference)).thenReturn(transaction);
+		when(transactionService.findByReference(reference)).thenReturn(transaction);
 
-			TransactionStatusRequest request = new TransactionStatusRequest();
-			request.setReference(reference);
-			request.setChannel(channel);
+		TransactionStatusRequest request = new TransactionStatusRequest();
+		request.setReference(reference);
+		request.setChannel(channel);
 
-			// When
-			TransactionStatusResponse response = transactionService.getTransactionStatus(request);
+		// When
+		TransactionStatusResponse response = transactionService.getTransactionStatus(request);
 
-			// Then
-			assertEquals("PENDING", response.getStatus());
-			assertEquals(amount, response.getAmount());
-			assertEquals(fee, response.getFee());		
+		// Then
+		assertEquals("PENDING", response.getStatus());
+		assertEquals(amount, response.getAmount());
+		assertEquals(fee, response.getFee());
 	}
-	
+
 	@Test
 	public void testTransactionStatusFive() {
 
 		// Given
-			String reference = "12345A";
-			String channel = "CLIENT";
-			BigDecimal amount = BigDecimal.valueOf(1000.0);
-			BigDecimal fee = BigDecimal.valueOf(10.0);
-			
-			Optional<Transaction> transaction = Optional.of(new Transaction());
-			transaction.ifPresent(t -> {
-			    t.setReference(reference);
-			    t.setAmount(amount);
-			    t.setFee(fee);
-			    t.setDate(LocalDateTime.now().plusDays(1));
-			});
+		String reference = "12345A";
+		String channel = "CLIENT";
+		BigDecimal amount = BigDecimal.valueOf(1000.0);
+		BigDecimal fee = BigDecimal.valueOf(10.0);
 
-			when(transactionService.findByReference(reference)).thenReturn(transaction);
+		Optional<Transaction> transaction = Optional.of(new Transaction());
+		transaction.ifPresent(t -> {
+			t.setReference(reference);
+			t.setAmount(amount);
+			t.setFee(fee);
+			t.setDate(LocalDateTime.now().plusDays(1));
+		});
 
-			TransactionStatusRequest request = new TransactionStatusRequest();
-			request.setReference(reference);
-			request.setChannel(channel);
+		when(transactionService.findByReference(reference)).thenReturn(transaction);
 
-			// When
-			TransactionStatusResponse response = transactionService.getTransactionStatus(request);
+		TransactionStatusRequest request = new TransactionStatusRequest();
+		request.setReference(reference);
+		request.setChannel(channel);
 
-			// Then
-			assertEquals("FUTURE", response.getStatus());
-			assertEquals(amount.subtract(fee), response.getAmount());
-		
+		// When
+		TransactionStatusResponse response = transactionService.getTransactionStatus(request);
+
+		// Then
+		assertEquals("FUTURE", response.getStatus());
+		assertEquals(amount.subtract(fee), response.getAmount());
+
 	}
-	
+
 	@Test
 	public void testTransactionStatusSix() {
 
 		// Given
-			String reference = "12345A";
-			String channel = "ATM";
-			BigDecimal amount = BigDecimal.valueOf(1000.0);
-			BigDecimal fee = BigDecimal.valueOf(10.0);
-			
-			Optional<Transaction> transaction = Optional.of(new Transaction());
-			transaction.ifPresent(t -> {
-			    t.setReference(reference);
-			    t.setAmount(amount);
-			    t.setFee(fee);
-			    t.setDate(LocalDateTime.now().plusDays(1));
-			});
+		String reference = "12345A";
+		String channel = "ATM";
+		BigDecimal amount = BigDecimal.valueOf(1000.0);
+		BigDecimal fee = BigDecimal.valueOf(10.0);
 
-			when(transactionService.findByReference(reference)).thenReturn(transaction);
+		Optional<Transaction> transaction = Optional.of(new Transaction());
+		transaction.ifPresent(t -> {
+			t.setReference(reference);
+			t.setAmount(amount);
+			t.setFee(fee);
+			t.setDate(LocalDateTime.now().plusDays(1));
+		});
 
-			TransactionStatusRequest request = new TransactionStatusRequest();
-			request.setReference(reference);
-			request.setChannel(channel);
+		when(transactionService.findByReference(reference)).thenReturn(transaction);
 
-			// When
-			TransactionStatusResponse response = transactionService.getTransactionStatus(request);
+		TransactionStatusRequest request = new TransactionStatusRequest();
+		request.setReference(reference);
+		request.setChannel(channel);
 
-			// Then
-			assertEquals("PENDING", response.getStatus());
-			assertEquals(amount.subtract(fee), response.getAmount());
-		
+		// When
+		TransactionStatusResponse response = transactionService.getTransactionStatus(request);
+
+		// Then
+		assertEquals("PENDING", response.getStatus());
+		assertEquals(amount.subtract(fee), response.getAmount());
+
 	}
-	
+
 	@Test
 	public void testTransactionStatusSeven() {
 
 		// Given
-			String reference = "12345A";
-			String channel = "INTERNAL";
-			BigDecimal amount = BigDecimal.valueOf(1000.0);
-			BigDecimal fee = BigDecimal.valueOf(10.0);
-			
-			Optional<Transaction> transaction = Optional.of(new Transaction());
-			transaction.ifPresent(t -> {
-			    t.setReference(reference);
-			    t.setAmount(amount);
-			    t.setFee(fee);
-			    t.setDate(LocalDateTime.now().plusDays(1));
-			});
+		String reference = "12345A";
+		String channel = "INTERNAL";
+		BigDecimal amount = BigDecimal.valueOf(1000.0);
+		BigDecimal fee = BigDecimal.valueOf(10.0);
 
-			when(transactionService.findByReference(reference)).thenReturn(transaction);
+		Optional<Transaction> transaction = Optional.of(new Transaction());
+		transaction.ifPresent(t -> {
+			t.setReference(reference);
+			t.setAmount(amount);
+			t.setFee(fee);
+			t.setDate(LocalDateTime.now().plusDays(1));
+		});
 
-			TransactionStatusRequest request = new TransactionStatusRequest();
-			request.setReference(reference);
-			request.setChannel(channel);
+		when(transactionService.findByReference(reference)).thenReturn(transaction);
 
-			// When
-			TransactionStatusResponse response = transactionService.getTransactionStatus(request);
+		TransactionStatusRequest request = new TransactionStatusRequest();
+		request.setReference(reference);
+		request.setChannel(channel);
 
-			// Then
-			assertEquals("FUTURE", response.getStatus());
-			assertEquals(amount, response.getAmount());
-			assertEquals(fee, response.getFee());
-		
+		// When
+		TransactionStatusResponse response = transactionService.getTransactionStatus(request);
+
+		// Then
+		assertEquals("FUTURE", response.getStatus());
+		assertEquals(amount, response.getAmount());
+		assertEquals(fee, response.getFee());
+
 	}
 }
