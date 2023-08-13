@@ -11,4 +11,4 @@ COPY target/demo-0.0.1-SNAPSHOT.jar /app/demo-0.0.1-SNAPSHOT.jar
 EXPOSE 8086
 
 # Define el comando para ejecutar tu aplicación
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
