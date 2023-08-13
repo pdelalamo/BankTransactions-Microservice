@@ -29,7 +29,10 @@ following endpoints:
     channel (optional): The type of the channel that is asking for the status. It can be any of these values:
     CLIENT, ATM, INTERNAL
 
--How to Test the Application
+-How to Test the Application:
+  1)In the directory that the DockerFile.txt is, run the next command to build de docker image: docker build -t nameyouwanttogivetotheimage
+  2)after the image is created, run the next command: docker run -d --name nameyouwanttogivethecontainer -p portofyourmachinetoruntheapp:8080 nameyougavetotheimage
+
 
   *Test the endpoints: 
 
