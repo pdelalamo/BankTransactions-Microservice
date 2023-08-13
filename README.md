@@ -31,7 +31,7 @@ following endpoints:
 
 -How to Test the Application:
   1)In the directory that the DockerFile.txt is, run the next command to build de docker image: docker build -t nameyouwanttogivetotheimage
-  2)after the image is created, run the next command: docker run -d --name nameyouwanttogivethecontainer -p portofyourmachinetoruntheapp:8080 nameyougavetotheimage
+  2)after the image is created, run the next command: docker run -d --name nameyouwanttogivethecontainer -p portofyourmachinetoruntheapp:8086 nameyougavetotheimage
 
 
   *Test the endpoints: 
