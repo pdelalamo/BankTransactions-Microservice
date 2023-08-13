@@ -30,8 +30,9 @@ following endpoints:
     CLIENT, ATM, INTERNAL
 
 -How to Test the Application:
-  1)In the directory that the DockerFile.txt is, run the next command to build de docker image: docker build -t nameyouwanttogivetotheimage pathoftheDockerFile.txt
-  2)after the image is created, run the next command: docker run -d --name nameyouwanttogivethecontainer -p portofyourmachinetoruntheapp:8086 nameyougavetotheimage
+  1)In the directory that the DockerFile.txt is, run the next command to build de docker image: docker build .
+  2)after the image is created, run the next command: docker run -d --name nameyouwanttogivethecontainer -p portofyourmachinetoruntheapp:8086 nameofthegeneratedimage
+  3)docker ps to check that the container is up and running
 
 
   *Test the endpoints: 
