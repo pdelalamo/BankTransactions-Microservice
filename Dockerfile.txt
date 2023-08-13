@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/demo-0.0.1-SNAPSHOT.jar /app/demo-0.0.1-SNAPSHOT.jar
 
 # Expone el puerto en el que se ejecuta tu aplicación
-EXPOSE 8080
+EXPOSE 8086
 
 # Define el comando para ejecutar tu aplicación
 CMD ["java", "-jar", "app.jar"]
